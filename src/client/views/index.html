@@ -8,6 +8,53 @@
     <title>Travel App</title>
 </head>
 <body>
-    
+    <div class="background-img"></div>
+    <h1 class="main-title">the travel app</h1>
+    <h2 class="date-of-travel"></h2>
+    <section class="location-info">
+        <div class="weather-column">
+            <div class="info-title">Weather</div>
+            <div class="info-value"></div>
+        </div>
+        <div class="weather-column">
+            <div class="weather-info-selection">
+                <div class="info-title">Temperature</div>
+                <div class="info-value"></div>
+            </div>
+            <div class="weather-info-selection">
+                <div class="info-title">Feels like</div>
+                <div class="info-value"></div>
+            </div>
+        </div>
+        <div class="weather-column">
+            <div class="weather-info-selection">
+                <div class="info-title">Sunrise</div>
+                <div class="info-value"></div>
+            </div>
+            <div class="weather-info-selection">
+                <div class="info-title">Sunset</div>
+                <div class="info-value"></div>
+            </div>
+        </div>
+        <div class="weather-column">
+            <div class="weather-info-selection">
+                <div class="info-title">Wind speed</div>
+                <div class="info-value"></div>
+            </div>
+            <div class="weather-info-selection">
+                <div class="info-title">Humidity</div>
+                <div class="info-value"></div>
+            </div>
+        </div>
+    </section>
+    <section class="form-box">
+        <form>
+            <label for="location">Where are you going?</label>
+            <input type="text" id="location" name="location" placeholder="City">
+            <label for="date">When are you leaving?</label>
+            <input type="text" id="date" name="date" placeholder="dd/mm/yy">
+            <input type="submit" value="Go!">
+        </form>
+    </section>
 </body>
 </html>
