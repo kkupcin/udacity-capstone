@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/style.css">
     <title>Travel App</title>
 </head>
 <body>
-    <div class="background-img"></div>
-    <h1 class="main-title">the travel app</h1>
-    <h2 class="date-of-travel"></h2>
+    <div class="background-img"> 
+        <h1 class="main-title">the travel app</h1>
+        <h2 class="date-of-travel">02/02/2021</h2>
+    </div>
     <section class="location-info">
         <div class="weather-column">
             <div class="info-title">Weather</div>
@@ -49,11 +51,15 @@
     </section>
     <section class="form-box">
         <form>
-            <label for="location">Where are you going?</label>
-            <input type="text" id="location" name="location" placeholder="City">
-            <label for="date">When are you leaving?</label>
-            <input type="text" id="date" name="date" placeholder="dd/mm/yy">
-            <input type="submit" value="Go!">
+            <div class="form-column">
+                <label for="location">Where are you going?</label>
+                <input type="text" id="location" name="location" placeholder="City">
+            </div>
+            <div class="form-column">
+                <label for="date">When are you leaving?</label>
+                <input type="text" id="date" name="date" placeholder="dd/mm/yy">
+            </div>
+            <input type="submit" value="Go!" id="submit-btn">
         </form>
     </section>
 </body>

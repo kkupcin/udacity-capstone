@@ -1,5 +1,93 @@
 @import "variables.scss";
+@import "resets.scss";
 
-* {
-  font-family: "Montserrat", sans-serif;
+body {
+  background-color: $sec-color;
+  font-family: $main-font;
+}
+
+.background-img {
+  background-image: url(../media/background-1.jpg);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: cover;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .main-title {
+    color: $sec-color;
+    font-size: 52px;
+    font-weight: 500;
+    white-space: nowrap;
+    margin-bottom: 42px;
+  }
+
+  .date-of-travel {
+    color: $sec-color;
+    font-size: 28px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+}
+
+.location-info {
+  display: none;
+}
+
+.form-box {
+  background-color: $sec-color;
+  box-shadow: $def-box-shadow;
+  border-radius: $def-border-rad;
+  color: $main-txt-color;
+  font-size: 18px;
+  padding: 28px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 65vh;
+
+  form {
+    display: flex;
+    justify-content: center;
+
+    .form-column {
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+
+      label {
+        margin-bottom: 16px;
+      }
+
+      input {
+        border-radius: $def-border-rad;
+        box-shadow: none;
+        outline: none;
+        border: $input-border;
+        background-color: transparent;
+        font-size: 16px;
+        padding: 8px;
+        color: $main-txt-color;
+        font-family: $main-font;
+      }
+    }
+
+    #submit-btn {
+      background-color: $btn-color;
+      color: $sec-color;
+      font-size: 18px;
+      font-weight: 500;
+      outline: none;
+      box-shadow: $def-box-shadow;
+      border-radius: $def-border-rad;
+      border: none;
+      font-family: $main-font;
+      margin: 16px 32px;
+      padding: 8px 52px;
+      align-self: flex-end;
+    }
+  }
 }
