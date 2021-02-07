@@ -3,8 +3,11 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const fetch = require('node-fetch')
 const dotenv = require('dotenv')
+const path = require('path')
 
 dotenv.config();
+
+userInput = {}
 
 
 // Starting instance of an app
@@ -19,7 +22,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Initialize the main project folder (dist for Webpack)
-app.use(express.static('dist'));
+app.use(express.static('../../dist'));
 
 // ASK ZIL
 app.get('/', function (req, res) {
@@ -36,10 +39,10 @@ app.listen(port, () => {
 // ROUTES
 
 app.get('/getData', function (req, res) {
-    res.send(projectData);
+    res.send(userInput);
 });
 
 app.post('/postData', function (req, res) {
-    projectData = req.body;
+    userInput = req.body;
     res.send('Post successful');
 });

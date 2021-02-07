@@ -11,56 +11,62 @@
 <body>
     <div class="background-img"> 
         <h1 class="main-title">the travel app</h1>
-        <h2 class="date-of-travel">02/02/2021</h2>
+        <h2 class="date-of-travel"></h2>
     </div>
-    <section class="location-info">
-        <div class="weather-column">
-            <div class="info-title">Weather</div>
-            <div class="info-value"></div>
+    <section class="main-content">
+        <div class="location-info">
+            <div class="weather-column first-column">
+                <div class="info-title">Weather</div>
+                <div class="info-value">
+                    <div class="weather-logo"><img src="https://www.weatherbit.io/static/img/icons/t01d.png" alt="weather logo"></div>
+                    <div class="main-weather-info">Broken clouds</div>
+                </div>
+            </div>
+            <div class="weather-column">
+                <div class="weather-info-selection">
+                    <div class="info-title">Temperature</div>
+                    <div class="info-value">23C</div>
+                </div>
+                <div class="weather-info-selection">
+                    <div class="info-title">Feels like</div>
+                    <div class="info-value">25C</div>
+                </div>
+            </div>
+            <div class="weather-column">
+                <div class="weather-info-selection">
+                    <div class="info-title">Sunrise</div>
+                    <div class="info-value">06:00</div>
+                </div>
+                <div class="weather-info-selection">
+                    <div class="info-title">Sunset</div>
+                    <div class="info-value">18:00</div>
+                </div>
+            </div>
+            <div class="weather-column">
+                <div class="weather-info-selection">
+                    <div class="info-title">Wind speed</div>
+                    <div class="info-value">24m/s</div>
+                </div>
+                <div class="weather-info-selection">
+                    <div class="info-title">Humidity</div>
+                    <div class="info-value">12%</div>
+                </div>
+            </div>
         </div>
-        <div class="weather-column">
-            <div class="weather-info-selection">
-                <div class="info-title">Temperature</div>
-                <div class="info-value"></div>
-            </div>
-            <div class="weather-info-selection">
-                <div class="info-title">Feels like</div>
-                <div class="info-value"></div>
-            </div>
-        </div>
-        <div class="weather-column">
-            <div class="weather-info-selection">
-                <div class="info-title">Sunrise</div>
-                <div class="info-value"></div>
-            </div>
-            <div class="weather-info-selection">
-                <div class="info-title">Sunset</div>
-                <div class="info-value"></div>
-            </div>
-        </div>
-        <div class="weather-column">
-            <div class="weather-info-selection">
-                <div class="info-title">Wind speed</div>
-                <div class="info-value"></div>
-            </div>
-            <div class="weather-info-selection">
-                <div class="info-title">Humidity</div>
-                <div class="info-value"></div>
-            </div>
+        <div class="form-box">
+            <form>
+                <div class="form-column">
+                    <label for="location">Where are you going?</label>
+                    <input type="text" id="location" name="location" placeholder="City">
+                </div>
+                <div class="form-column">
+                    <label for="date">When are you leaving?</label>
+                    <input type="date" id="date" name="date" placeholder="dd/mm/yy">
+                </div>
+                <input type="submit" value="Go!" id="submit-btn">
+            </form>
         </div>
     </section>
-    <section class="form-box">
-        <form>
-            <div class="form-column">
-                <label for="location">Where are you going?</label>
-                <input type="text" id="location" name="location" placeholder="City">
-            </div>
-            <div class="form-column">
-                <label for="date">When are you leaving?</label>
-                <input type="text" id="date" name="date" placeholder="dd/mm/yy">
-            </div>
-            <input type="submit" value="Go!" id="submit-btn">
-        </form>
-    </section>
+    </body>
 </body>
 </html>

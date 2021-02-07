@@ -7,11 +7,11 @@ body {
 }
 
 .background-img {
-  background-image: url(../media/background-1.jpg);
+  background-image: url(https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80);
   background-repeat: no-repeat;
   background-position: right;
   background-size: cover;
-  height: 70vh;
+  height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,68 +26,205 @@ body {
   }
 
   .date-of-travel {
+    display: none;
     color: $sec-color;
     font-size: 28px;
     font-weight: 500;
     white-space: nowrap;
   }
+
+  @media only screen and (max-width: 850px) {
+    height: 45vh;
+  }
 }
 
-.location-info {
-  display: none;
-}
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -150px;
 
-.form-box {
-  background-color: $sec-color;
-  box-shadow: $def-box-shadow;
-  border-radius: $def-border-rad;
-  color: $main-txt-color;
-  font-size: 18px;
-  padding: 28px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 65vh;
+  .location-info {
+    display: none;
+    justify-content: space-around;
 
-  form {
-    display: flex;
-    justify-content: center;
+    .weather-column {
+      padding: 8px 48px;
+      white-space: nowrap;
 
-    .form-column {
-      display: flex;
-      flex-direction: column;
-      padding: 16px;
-
-      label {
-        margin-bottom: 16px;
+      .info-title {
+        margin: 16px 0;
+        font-weight: 500;
       }
 
-      input {
-        border-radius: $def-border-rad;
-        box-shadow: none;
+      .info-value {
+        padding-bottom: 8px;
+        display: flex;
+        align-items: center;
+
+        .weather-logo img {
+          width: 100%;
+        }
+
+        .main-weather-info {
+          font-size: 24px;
+          margin-left: 16px;
+        }
+      }
+    }
+  }
+
+  .form-box {
+    margin: 62px 0;
+  }
+
+  .form-box,
+  .location-info {
+    background-color: $sec-color;
+    box-shadow: $def-box-shadow;
+    border-radius: $def-border-rad;
+    color: $main-txt-color;
+    font-size: 18px;
+    padding: 28px;
+
+    form {
+      display: flex;
+      justify-content: center;
+
+      .form-column {
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+
+        label {
+          margin-bottom: 16px;
+        }
+
+        input {
+          border-radius: $def-border-rad;
+          box-shadow: none;
+          outline: none;
+          border: $input-border;
+          background-color: transparent;
+          font-size: 16px;
+          padding: 8px;
+          color: $main-txt-color;
+          font-family: $main-font;
+          transition: all 0.5s ease;
+
+          &:hover {
+            border: 1px solid #303030;
+          }
+        }
+      }
+
+      #submit-btn {
+        background-color: $btn-color;
+        color: $sec-color;
+        font-size: 18px;
+        font-weight: 500;
         outline: none;
-        border: $input-border;
-        background-color: transparent;
-        font-size: 16px;
-        padding: 8px;
-        color: $main-txt-color;
+        box-shadow: $def-box-shadow;
+        border-radius: $def-border-rad;
+        border: none;
         font-family: $main-font;
+        margin: 16px 32px;
+        padding: 8px 52px;
+        align-self: flex-end;
+        transition: all 0.5s ease;
+
+        &:hover {
+          cursor: pointer;
+          box-shadow: 0px 3px 8px 2px rgba(0, 0, 0, 0.4);
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1100px) {
+    .location-info {
+      width: 100%;
+      .weather-column {
+        padding: 8px 24px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 850px) {
+    margin-top: 0;
+    .location-info {
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+
+      .weather-column {
+        width: 33%;
+        box-sizing: border-box;
+
+        &.first-column {
+          width: 100%;
+        }
       }
     }
 
-    #submit-btn {
-      background-color: $btn-color;
-      color: $sec-color;
-      font-size: 18px;
-      font-weight: 500;
-      outline: none;
-      box-shadow: $def-box-shadow;
-      border-radius: $def-border-rad;
-      border: none;
-      font-family: $main-font;
-      margin: 16px 32px;
-      padding: 8px 52px;
-      align-self: flex-end;
+    .form-box {
+      form {
+        flex-direction: column;
+
+        #submit-btn {
+          width: 230px;
+          margin: 16px auto;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 440px) {
+    .location-info {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+
+      .weather-column {
+        width: 50%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .background-img {
+    .main-title {
+      font-size: 32px;
+    }
+
+    .date-of-travel {
+      font-size: 24px;
+    }
+  }
+
+  .main-content {
+    .location-info {
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .weather-column {
+        width: 100%;
+
+        .info-value {
+          .main-weather-info {
+            font-size: 18px;
+            margin-left: 8px;
+          }
+        }
+      }
+    }
+
+    .form-box {
+      width: 100%;
+      form {
+        #submit-btn {
+          width: 160px;
+        }
+      }
     }
   }
 }
