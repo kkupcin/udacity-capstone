@@ -1,13 +1,14 @@
 const baseUrl = 'http://api.geonames.org/searchJSON?';
 const geonamesUser = 'kkupcin'
 const searchParam = 'q=';
+const errorBox = document.querySelector('.error-box');
 
 // Get list of cities
 const fetchCities = async function() {
     const userCity = document.querySelector('#location').value;
     const geonamesResponse = await fetch(baseUrl + searchParam + userCity + '&maxRows=10' + '&username=' + geonamesUser);
     const geonamesInfo = await geonamesResponse.json();
-    return geonamesInfo.geonames;
+    return geonamesInfo.geonames;   
 };
 
 //Post data to the server
@@ -48,4 +49,44 @@ async function updateUi(city, country, date) {
     dateElement.innerHTML = date;
 };
 
-export { fetchCities, postData, getData, updateUi }
+//Validate date from user
+function isDateValid(userDate) {
+  if (isNaN(Date.parse(userDate)) || userDate === '') {
+    displayError('Please enter a date');
+    return false;
+  } 
+  hideError();
+  return true;
+}
+
+//Validate city from user
+function isCityValid(userCity) {
+  if (userCity === '') {
+    displayError('Please enter a city');
+    return false;
+  } 
+  hideError();
+  return true;
+}
+
+function isResponseValid(responseLength) {
+  if (responseLength === 0) {
+    displayError('City is invalid');
+    return false;
+  } 
+  hideError();
+  return true;
+}
+
+//Display or hide error box in the form
+function displayError(message) {
+  errorBox.style.display = 'block';
+  errorBox.innerHTML = message;
+}
+
+function hideError() {
+  errorBox.style.display = 'none';
+}
+
+
+export { fetchCities, postData, getData, updateUi, isDateValid, isResponseValid }

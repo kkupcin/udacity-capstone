@@ -76,6 +76,13 @@ body {
 
   .form-box {
     margin: 62px 0;
+
+    .error-box {
+      display: none;
+      color: #ff0000;
+      margin-top: 8px;
+      padding: 0 16px;
+    }
   }
 
   .form-box,
