@@ -9,8 +9,9 @@ body {
 .background-img {
   background-image: url(https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80);
   background-repeat: no-repeat;
-  background-position: right;
+  background-position: center;
   background-size: cover;
+  background-blend-mode: overlay;
   height: 60vh;
   display: flex;
   flex-direction: column;
@@ -62,8 +63,12 @@ body {
         display: flex;
         align-items: center;
 
-        .weather-logo img {
-          width: 100%;
+        .weather-logo {
+          max-width: 100px;
+
+          img {
+            width: 100%;
+          }
         }
 
         .main-weather-info {
