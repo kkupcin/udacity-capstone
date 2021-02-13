@@ -6,31 +6,41 @@ const weatherbitKey = '3159deb347dc473e837003f215251c4d';
 const pixabayBaseUrl = 'https://pixabay.com/api/?key=';
 const pixabayKey = '20111247-461e035714f972435ba1428ed';
 const errorBox = document.querySelector('.error-box');
+let valuePairs = {}
 
 // Get list of cities
 const fetchCities = async function() {
     const userCity = document.querySelector('#location').value;
     const geonamesResponse = await fetch(geonamesBaseUrl + 'q=' + userCity + '&maxRows=10' + '&username=' + geonamesUser);
     const geonamesInfo = await geonamesResponse.json();
+    valuePairs = geonamesInfo.geonames;
     return geonamesInfo.geonames;   
 };
 
 // Get weather from Weatherbit API
 const fetchWeather = async function(lat, lon, userDate) {
   const dateDiff = Date.parse(userDate) - Date.now();
-  let weatherbitResponse;
+
+  //Also checking if date is in the past, within a week or over 16 days away
   if (dateDiff > 1382400000) {
-    displayError('Cannot fetch weather - date too far in the future')
+    displayError('Cannot fetch weather - date too far in the future');
+    return false;
+  } else if (dateDiff < -86400000 ) {
+    displayError('Cannot fetch weather - date is in the past');
+    return false;
   } else if (dateDiff < 604800000) {
-    weatherbitResponse = await fetch(weatherbitBaseUrlCurrent + 'lat=' + lat + '&lon=' + lon + '&key=' + weatherbitKey);
+    let weatherbitResponse = await fetch(weatherbitBaseUrlCurrent + 'lat=' + lat + '&lon=' + lon + '&key=' + weatherbitKey);
+    let weatherbitInfo = await weatherbitResponse.json();
+    convertTimezone(userDate, weatherbitInfo);
+    return weatherbitInfo.data[0];
   } else {
-    weatherbitResponse = await fetch(weatherbitBaseUrlForecast + 'lat=' + lat + '&lon=' + lon + '&key=' + weatherbitKey);
+    let weatherbitResponse = await fetch(weatherbitBaseUrlForecast + 'lat=' + lat + '&lon=' + lon + '&key=' + weatherbitKey);
+    let weatherbitInfo = await weatherbitResponse.json();
+    return findDateInApiResponse(userDate, weatherbitInfo.data);
   }
-  const weatherbitInfo = await weatherbitResponse.json();
-  return weatherbitInfo.data;
 }
 
-// Get weather from Weatherbit API
+// Get image from Pixabay API
 const fetchImage = async function(location) {
   const pixabayResponse = await fetch(pixabayBaseUrl + pixabayKey + '&q=' + encodeURIComponent(location) + '&image_type=photo' + '&orientation=horizontal');
   const pixabayInfo = await pixabayResponse.json();
@@ -87,14 +97,14 @@ async function updateWeather(weatherInfo) {
   const mainContentDiv = document.querySelector('.location-info');
 
   mainContentDiv.style.display = 'flex';
-  iconDiv.innerHTML = `<img src="https://www.weatherbit.io/static/img/icons/${weatherInfo[0].weather.icon}.png" alt="weather logo">`;
-  weatherDiv.innerHTML = weatherInfo[0].weather.description;
-  tempDiv.innerHTML = `${weatherInfo[0].temp}C`;
-  feelsDiv.innerHTML = `${weatherInfo[0].app_temp ? weatherInfo[0].app_temp + 'C' : '-' }`;
-  sunriseDiv.innerHTML = weatherInfo[0].sunrise ? weatherInfo[0].sunrise : '-';
-  sunsetDiv.innerHTML = weatherInfo[0].sunset ? weatherInfo[0].sunset : '-';
-  windDiv.innerHTML = `${weatherInfo[0].wind_spd}m/s`;
-  humidityDiv.innerHTML = `${weatherInfo[0].rh}%`;
+  iconDiv.innerHTML = `<img src="https://www.weatherbit.io/static/img/icons/${weatherInfo.weather.icon}.png" alt="weather logo">`;
+  weatherDiv.innerHTML = weatherInfo.weather.description;
+  tempDiv.innerHTML = `${weatherInfo.temp}C`;
+  feelsDiv.innerHTML = `${weatherInfo.app_temp ? weatherInfo.app_temp + 'C' : '-' }`;
+  sunriseDiv.innerHTML = weatherInfo.sunrise ? weatherInfo.sunrise : '-';
+  sunsetDiv.innerHTML = weatherInfo.sunset ? weatherInfo.sunset : '-';
+  windDiv.innerHTML = `${weatherInfo.wind_spd}m/s`;
+  humidityDiv.innerHTML = `${weatherInfo.rh}%`;
 }
 
 //Update UI with Image
@@ -112,6 +122,8 @@ function isDateValid(userDate) {
   hideError();
   return true;
 }
+
+
 
 //Validate city from user
 function isCityValid(userCity) {
@@ -140,6 +152,38 @@ function displayError(message) {
 
 function hideError() {
   errorBox.style.display = 'none';
+}
+
+// Change travel date to query against Weatherbit API
+function findDateInApiResponse(travelDate, apiResponse) {
+  let travelDateForAPI = travelDate.split('/')
+  travelDateForAPI = [travelDateForAPI[2], travelDateForAPI[0], travelDateForAPI[1]];
+  travelDateForAPI = travelDateForAPI.join('-');
+
+  const foundDate = apiResponse.find(obj => travelDateForAPI === obj.valid_date);
+  return foundDate;
+}
+
+//Convert sunrise and sunset time to destination timezone
+
+function convertTimezone(userDate, weatherbitInfo) {
+  weatherbitInfo.data[0].timezone = weatherbitInfo.data[0].timezone.replace('\\', '');
+    let sunriseTime = new Date(userDate + ' ' + weatherbitInfo.data[0].sunrise);
+    let sunsetTime = new Date(userDate + ' ' + weatherbitInfo.data[0].sunset);
+
+    sunriseTime = sunriseTime.toLocaleTimeString('en-GB', {timeZone: weatherbitInfo.data[0].timezone});
+    sunsetTime = sunsetTime.toLocaleTimeString('en-GB', {timeZone: weatherbitInfo.data[0].timezone});
+
+    sunriseTime = sunriseTime.split(':');
+    sunriseTime = [sunriseTime[0], sunriseTime[1]];
+    sunriseTime = sunriseTime.join(':');
+
+    sunsetTime = sunsetTime.split(':');
+    sunsetTime = [sunsetTime[0], sunsetTime[1]];
+    sunsetTime = sunsetTime.join(':');
+    
+    weatherbitInfo.data[0].sunrise = sunriseTime;
+    weatherbitInfo.data[0].sunset = sunsetTime;
 }
 
 

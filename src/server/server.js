@@ -1,7 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const fetch = require('node-fetch')
 const dotenv = require('dotenv')
 const path = require('path')
 
@@ -22,9 +21,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Initialize the main project folder (dist for Webpack)
-app.use(express.static('../../dist'));
+app.use(express.static('dist'));
 
-// ASK ZIL
 app.get('/', function (req, res) {
     // res.sendFile('dist/index.html')
     res.sendFile(path.resolve('src/client/views/index.html'))

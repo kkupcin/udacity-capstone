@@ -21,8 +21,9 @@ body {
   .main-title {
     color: $sec-color;
     font-size: 52px;
+    text-align: center;
+    word-break: break-word;
     font-weight: 500;
-    white-space: nowrap;
     margin-bottom: 42px;
   }
 
