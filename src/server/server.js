@@ -6,7 +6,7 @@ const path = require('path')
 
 dotenv.config();
 
-userInput = {}
+let userInput = {}
 
 
 // Starting instance of an app
@@ -24,7 +24,6 @@ app.use(cors());
 app.use(express.static('dist'));
 
 app.get('/', function (req, res) {
-    // res.sendFile('dist/index.html')
     res.sendFile(path.resolve('src/client/views/index.html'))
 })
 
@@ -44,3 +43,5 @@ app.post('/postData', function (req, res) {
     userInput = req.body;
     res.send('Post successful');
 });
+
+module.exports = app 

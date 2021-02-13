@@ -60,7 +60,7 @@ async function postData(url = '', data = {}) {
       });
       const resData = await response.text();
       console.log(resData);
-};
+}
 
 //Get data from the server
 async function getData(url = '') {
@@ -74,7 +74,7 @@ async function getData(url = '') {
     });
     const jsonData = await response.json();
     return jsonData;
-};
+}
 
 //Update the UI dynamically
 async function updateLocation(city, country, date) {
@@ -83,7 +83,7 @@ async function updateLocation(city, country, date) {
     locationDiv.innerHTML = city + ', ' + country;
     dateElement.style.display = 'block';
     dateElement.innerHTML = date;
-};
+}
 
 async function updateWeather(weatherInfo) {
   const iconDiv = document.querySelector('.weather-logo');
